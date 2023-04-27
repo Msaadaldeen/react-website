@@ -1,0 +1,249 @@
+### Variables ###
+
+@host = http://127.0.0.1:5000
+@token = {{postLogin.response.body.token}}
+
+@updateUserId = {{postRegister.response.body._id}}
+
+
+
+### LOGIN - USER ###
+# @name postLogin
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test12345"
+}
+
+
+### REGISTER - USER ###
+# @name postRegister
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+    "firstname": "test",
+    "lastname": "test",
+    "username": "test{{$datetime 'ss'}}",
+    "email": "test{{$datetime 'ss'}}@test.test",
+    "password": "Test123!",
+    "passwordConfirm": "Test123!"
+}
+
+### UPDATE - USER ###
+PUT {{host}}/api/users/{{updateUserId}}
+Content-Type: application/json
+
+
+{
+    "userId" : "{{updateUserId}}",
+    "firstname": "test0",
+    "lastname": "new update",
+    "username": "upadte0",
+    "email": "newupdate0@test.test ",
+    "password": "update12345",
+    "passwordConfirm": "update12345"
+}
+
+### GET - USER ###
+GET {{host}}/api/users/{{updateUserId}}
+Content-Type: application/json
+
+###GET ALL - USER ###
+GET {{host}}/api/users
+Content-Type: application/json
+
+### POSTS ###
+
+### GET ALL
+GET {{host}}/api/posts
+
+### GET USERS POSTS
+GET {{host}}/api/users/63fcd7b25a86747cd67aeb49/posts/all
+
+### GET ONE
+GET {{host}}/api/posts/63fcb472918ba0c653036c64
+
+### PUT
+PUT {{host}}/api/posts/63da8eefd5204501fed93335
+Content-Type: application/json
+token: Bearer {{token}}
+
+{
+    "title": " updated post",
+    "body": "updated body",
+    "photo": " "
+}
+
+### POST
+POST {{host}}/api/posts
+Content-Type: application/json
+token: Bearer {{token}}
+
+{
+    "title": "new test post",
+    "body": "new test body",
+    "photo": " "
+}
+
+### DELETE
+DELETE {{host}}/api/posts/:id
+Content-Type: application/json
+
+
+{
+    "id": "63a27d188decc121d0b6ac70"
+}
+
+### COURSES ###
+
+### GET ALL
+GET {{host}}/api/courses
+content-type: application/json
+
+### GET ONE
+GET {{host}}/api/courses/:id
+content-type: application/json
+
+### GET COURSES BY USER ID
+GET {{host}}/api/users/:id/courses
+content-type: application/json
+token: Bearer {{token}}
+
+
+{
+    "id": "63a26476c9456482dd5dbf75"
+}
+
+### COURSES BY CATEGORY ###
+GET {{host}}/api/courses?category=63db41aa85cb5496bf4fd30f
+content-type: application/json
+
+### PUT
+PUT {{host}}/api/courses/63df0b96514082cf9649553c
+content-type: application/json
+
+{
+    "title": "lorem ipsum courseee",
+    "body": "ipsum idot body",
+    "video": " ",
+    "Author": " ",
+    "categories": [
+        "63db424785cb5496bf4fd313"
+    ],
+    "price": " ",
+    "duration": " ",
+    "language": " ",
+    "studentsCount": " "
+}
+
+### POST
+POST {{host}}/api/courses
+content-type: application/json
+token: Bearer {{token}}
+
+{
+    "title": "course with category",
+    "body": "ipsum idot body",
+    "video": " ",
+    "Author": "adsad ",
+    "categories": [
+        "63db41aa85cb5496bf4fd30f"
+    ],
+    "price": "asdasd ",
+    "duration": "adsad ",
+    "language": " asdasd",
+    "studentsCount": "asdsad "
+}
+
+### DELETE
+DELETE {{host}}/api/courses/:id
+content-type: application/json
+
+{
+    "id": "63a27d188decc121d0b6ac70"
+}
+
+
+
+
+### CATEGORIES ###
+
+### GET ALL
+GET {{host}}/api/categories
+
+### GET ONE
+GET {{host}}/api/categories/63db41aa85cb5496bf4fd30f
+content-type: application/json
+
+### GET CATEGORIES BY ID
+GET {{host}}/api/categories?categoryIds=63db424785cb5496bf4fd313
+content-type: application/json
+
+### POST
+POST {{host}}/api/categories
+content-type: application/json
+token: Bearer {{token}}
+
+
+{
+    "name": "Music"
+}
+
+### PUT
+PUT {{host}}/api/categories/63e319afcc600061297e4284
+content-type: application/json
+token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTI2NDc2Yzk0NTY0ODJkZDVkYmY3NSIsImlhdCI6MTY3NTQwMDM3NCwiZXhwIjoxNjc2MDA1MTc0fQ.DLrJvTTQK45xm-emNHghPIfvQ7-So90PBBQLJif88eY
+
+{
+    "name": "online marketing"
+
+}
+
+### DELETE
+DELETE {{host}}/api/categories/63db41aa85cb5496bf4fd30f
+content-type: application/json
+token: Bearer {{token}}
+
+{
+    "id": "63db41aa85cb5496bf4fd30f"
+}
+
+
+### Roles ###
+
+### GET ALL
+GET {{host}}/api/roles
+
+### GET ONE
+GET {{host}}/api/roles/63db41aa85cb5496bf4fd30f
+content-type: application/json
+
+### POST
+### POST
+POST {{host}}/api/roles
+content-type: application/json
+token: Bearer {{token}}
+
+
+{
+    "name": "moderator"
+}
+
+### PUT
+PUT {{host}}/api/roles/:id
+content-type: application/json
+
+{
+    "name": "admin"
+}
+
+### DELETE
+DELETE {{host}}/api/roles/:id
+content-type: application/json
+
+{
+    "id": "63db41aa85cb5496bf4fd30f"
+}
